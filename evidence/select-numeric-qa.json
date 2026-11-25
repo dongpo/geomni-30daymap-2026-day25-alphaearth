@@ -1,0 +1,24 @@
+{
+  "cells": 39275,
+  "taiwan_query_cells": 23485,
+  "overseas_candidate_cells": 15790,
+  "unique_ids": 39275,
+  "max_float32_norm_error": 5.960464477539063e-08,
+  "bytes": 10054400,
+  "tiles": 31,
+  "independent_browser_comparisons": [
+    {
+      "query_id": "12-13-55",
+      "best_id": "4-45-60",
+      "best_cosine": 0.8951982298889234,
+      "browser_rounded_score": 0.895
+    },
+    {
+      "query_id": "13-13-47",
+      "best_id": "5-37-62",
+      "best_cosine": 0.6732764531327404,
+      "browser_rounded_score": 0.673
+    }
+  ],
+  "duplicate_centers": 0
+}

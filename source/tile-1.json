@@ -1,0 +1,23 @@
+{
+  "url": "https://storage.googleapis.com/alphaearth_foundations/satellite_embedding/v1/annual/2024/51N/xwyu7da2qntg9axe0-0000000000-0000000000.tiff",
+  "crs": "EPSG:32651",
+  "transform": [
+    1280.0,
+    0.0,
+    172320.0,
+    0.0,
+    1280.0,
+    2621440.0,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "shape": [
+    64,
+    64,
+    64
+  ],
+  "elapsed_seconds": 4.250298738479614,
+  "nodata": -128.0,
+  "overview_factor": 128
+}

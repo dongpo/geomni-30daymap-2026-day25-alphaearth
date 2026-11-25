@@ -1,0 +1,24 @@
+#30DayMapChallenge 2026｜Day 25 — Is this a map?
+
+這裡，像哪裡？
+
+如果在臺灣地圖上點一個地方，不輸入地名，也不先指定「農田」或「森林」，能不能找到遠方具有相似特徵的區域？
+
+這次把 Google 與 Google DeepMind 的 AlphaEarth Foundations 特徵資料放進地圖。讀者可以自己選擇臺灣的位置，系統重新計算相似度，再把候選地點的真實位置與影像並排呈現。換一個地方，得到的結果也會改變，不是事先準備好的幾組答案。
+
+AlphaEarth 將遙測資訊轉成64維特徵向量。可以把它理解為一組用來描述地方的數值，但每一維並不是「農田比例」或「建物密度」這樣能直接命名的欄位。這次使用2024年資料的官方概覽，以約1.28公里見方的區域為單位，透過向量的 cosine 相似度尋找候選。
+
+技術上的「相似」，不一定就是我們眼中的相像。因此，我保留兩個層次：上方地圖回答它們在哪裡、相隔多遠；下方以相近地面尺度對照影像，讓讀者檢查模型找到的關係。分數很高，是否真的有共同的地景？分數較低，又有哪些差異？判斷並沒有交給模型就結束。
+
+這也是我對「Is this a map?」的回應：地圖可以成為探索地理特徵的入口，讓搜尋結果回到具體位置，接受影像與人的經驗檢視。AI提供了另一種尋找關係的方法，地圖則讓這些關係有機會被理解與查證。
+
+本版可選臺灣約2.35萬個有效格，海外搜尋限於日本茨城、韓國全羅、越南北部與泰國中部四個圖幅，也可加入臺灣其他地區；不是全球搜尋。相似度不是分類正確率，也不能直接證明土地用途相同。對照影像是多期鑲嵌，未逐格確認拍攝日期，不當成2024年同期真值。
+
+附上32秒實際操作影片，展示選點、候選切換與重新搜尋。
+
+🗺️ 互動地圖：https://dongpo.github.io/geomni-30daymap-2026-day25-alphaearth/
+💻 程式與資料：https://github.com/dongpo/geomni-30daymap-2026-day25-alphaearth
+
+資料：Google / Google DeepMind AlphaEarth Foundations Satellite Embedding，CC BY 4.0。影像與底圖：Esri及其供應者、OpenStreetMap contributors。技術：Python、Rasterio、NumPy、Leaflet、瀏覽器向量運算。
+
+#30DayMapChallenge #GeoAI #AlphaEarth #GIS #Geomni

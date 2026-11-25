@@ -1,0 +1,23 @@
+{
+  "status": "READY_FOR_MAP_REVIEW",
+  "date": "2026-11-25",
+  "browser": "Codex in-app browser",
+  "passed": [
+    "Taiwan map clicked near Tainan: query23.10007N120.49445E, Vietnam0.895 Thailand0.850 Japan0.544 Korea0.418",
+    "Central mountains click: query23.84923N121.18383E, Thailand0.673 Vietnam0.571 Japan0.529 Korea0.393",
+    "Include Taiwan control: domestic candidate0.982, overseas results preserved",
+    "Sea click: rejected and previous query retained",
+    "Real imagery and coordinates visibly updated"
+  ],
+  "timing_ms": [
+    29,
+    20,
+    36
+  ],
+  "timing_scope": "search computation only, not loading/rendering",
+  "untested": [
+    "separate mobile viewport",
+    "all possible Taiwan clicks",
+    "raw10m valid fraction"
+  ]
+}

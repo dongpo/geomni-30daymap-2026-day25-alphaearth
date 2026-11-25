@@ -1,0 +1,28 @@
+Day25 v3｜讀者自選臺灣位置，搜尋AlphaEarth相似區域
+2026-11-25，依本人要求上傳GitHub；文章仍待審。v2固定桃園版本完整保留。
+
+資料與範圍
+Google/Google DeepMind AlphaEarth Foundations Satellite Embedding v1 annual 2024，CC BY4.0。
+The AlphaEarth Foundations Satellite Embedding dataset is produced by Google and Google DeepMind.
+官方下載與解量化方法：https://developers.google.com/earth-engine/guides/aef_on_gcs_readme
+來源索引、31個COG的URL/CRS與實際概覽原值都保存在source；SHA256-v3.json為本版來源雜湊。
+依臺澎金馬簡化縣市界選取相交圖幅；邊界沿用本專案Day19保存的NLSC來源 https://data.gov.tw/dataset/7442 ，政府資料開放授權條款第1版；已簡化約0.001度，海岸精確選點可能受影響，南海島嶼不在本版範圍。
+本版共39275格：臺灣陸域相交有效格23485，海外四圖幅候選15790。臺灣格與陸地相交並不保證整格為陸地，沿海仍可能含海面。
+
+選點與重算
+先檢查點擊位置是否在保存的臺灣陸域多邊形內，再找包含該點的有效特徵格。不使用最近格替補；範圍外或NoData會提示，保留原查詢。
+使用原生128倍概覽，每格UTM 1280m見方。不是單點特徵，也不是10m查詢成果。官方概覽為原始解量化向量平均並正規化；將int8以sign(v)*(v/127.5)^2還原，再正規化，輸出Float32供瀏覽器dot-product計算cosine。
+預設搜尋日本茨城、韓國全羅、越南北部、泰國中部四個預選圖幅；可加入臺灣其他地區。不是整個國家或全世界。
+排除查詢中心20km內；總排名前30格彼此相距至少5km；各樣區最佳是每個海外圖幅及選用臺灣群組各一格最高分。
+瀏覽器距離使用Leaflet球面測地距離（v2使用WGS84橢球）；只用於近鄰排除、候選間距及顯示距離，不影響cosine本身。門檻附近結果可能與橢球距離略不同。
+向量在瀏覽器本機即時運算，並非預先安排幾組固定答案，也沒有呼叫文字模型猜分數。計時只含搜尋計算及排序，不含下載、影像載入或首次開頁。
+
+圖面與限制
+金框為自選區域；青框為候選；真實位置不變。並排影像維持中心附近同地面尺度，保留平移與同步縮放。
+Esri World Imagery是多期鑲嵌，未逐格確認日期；不是2024同期真值或模型單一輸入影像。來源：https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer ，版權Esri/Maxar/Earthstar等；僅線上顯示，不批量下載影像。OSM線上底圖©OpenStreetMap contributors。
+相似分數不是機率，不保證同土地用途；沒有人工分類準確率。概覽格有效不保證全部底層10m像元皆有效。區域平均不保留全部空間排列。候選搜尋地理範圍有限，可能沒有真正相似的區域，仍顯示其最高分供讀者判斷。
+
+重現
+安裝 requirements-lock.txt 的Python依賴後，執行 python scripts/acquire.py 與 python scripts/build_select.py。公開副本未打包69MB全球索引；acquire.py會從官方公開網址下載缺少的索引。
+acquire.py保存公開COG概覽，已有快取不重複下載；build_select.py建立catalog.json、vectors.f32、taiwan.geojson。index.html/app.js是實際介面；透過HTTP靜態服務開啟。
+舊版資料與程式保留在本機歷史目錄；公開副本僅含v3所需檔案。v3數值驗收見select-numeric-qa.json，瀏覽器驗收見select-browser-qa.json。
